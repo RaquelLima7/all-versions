@@ -1,22 +1,28 @@
 <% unless customer.try(:event) && (customer.event == "create" || customer.event == "destroy") %>
     <tr>
-      <td><%= customer.try(:reify) ? customer.reify.first_name : customer.first_name %></td>
-      <td><%= customer.try(:reify) ? customer.reify.last_name : customer.last_name %></td>
-      <td><%= customer.try(:reify) ? customer.reify.birthday : customer.birthday %></td>
-      <td><%= customer.try(:reify) ? customer.reify.country : customer.country %></td>
-      <td><%= customer.try(:reify) ? customer.event : ' ' %></td>
-      <td><%= customer.try(:reify) ? customer.created_at.strftime('%d/%m/%y') : ' ' %></td>
+      <td class="align-middle"><%= customer.try(:reify) ? customer.reify.first_name : customer.first_name %></td>
+      <td class="align-middle text-center"><%= customer.try(:reify) ? customer.reify.last_name : customer.last_name %></td>
+      <td class="align-middle text-center"><%= customer.try(:reify) ? customer.reify.birthday : customer.birthday %></td>
+      <td class="align-middle text-center"><%= customer.try(:reify) ? customer.reify.country : customer.country %></td>
+      <td class="align-middle text-center"><%= customer.try(:reify) ? customer.event : ' ' %></td>
+      <td class="align-middle text-center"><%= customer.try(:reify) ? customer.created_at.strftime('%d/%m/%y') : ' ' %></td>
       <% if params[:action] == "index" %>
-          <td><%= link_to 'Show', customer_path(customer) %></td>
-          <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-          <td><%# link_to 'Destroy', customer_path(customer), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <td><%= link_to 'Versions', versions_customer_path(customer) %></td>
+          <td ><%= link_to customer_path(customer) do  %>
+            <i class="fa-solid fa-eye"></i>
+          <% end %> </td>
+          <td ><%= link_to edit_customer_path(customer) do %>
+            <i class="fa-solid fa-pencil"></i>
+          <% end %> </td>
+          <td ><%= link_to customer_path(customer), method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <i class="fa-solid fa-trash-can"></i>
+          <% end %> </td>
+          <td ><%= link_to 'Versions', versions_customer_path(customer), class: "text-decoration-none"%></td>
       <% end %>   
       <% if params[:action] == "versions" %>
-        <td><%# link_to 'Preview This Version', version_customer_path(@customer, customer) %></td>
+        <td><%= link_to 'Preview This Version', version_customer_path(@customer, customer), class: "text-decoration-none" %></td>
       <% end %>
       <% if params[:action] == "deleted" %>
-        <td><%# link_to 'Restore This Customer', restore_customer_path(customer), method: :post %></td>
+        <td><%= link_to 'Restore This Customer', restore_customer_path(customer), method: :post, class: "text-decoration-none" %></td>
       <% end %>
     </tr>
 <% end %>

@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: %i[ show edit update destroy versions]
+  before_action :set_version, only: %i[version revert]
 
   # GET /customers or /customers.json
   def index
@@ -60,13 +61,49 @@ class CustomersController < ApplicationController
     @customers = @customer.versions
   end
 
+  # GET /customers/:id/versions/:id
+  def version; end
+
+  # POST /customers/:id/revert/:version_id
+  def revert
+    @reverted_customer = @version.reify
+    if @reverted_customer.save
+      redirect_to versions_customer_path(@version.item_id), notice: "Customer was successfully reverted."
+    else
+      render version
+    end
+  end
+
+  # GET /customers/deleted
+  def deleted
+    @destroyed_versions = PaperTrail::Version.where(item_type: "Customer", event: "destroy").order(created_at: :desc)
+    @latest_destroyed_versions = @destroyed_versions.filter { |v| v.reify.versions.last.event == "destroy" }.map(&:reify).uniq(&:id)
+    @customers = @latest_destroyed_versions
+  end
+
+  # POST /customers/:id/restore
+  def restore
+    @latest_version = Customer.new(id: params[:id]).versions.last
+    if @latest_version.event == "destroy"
+      @customer = @latest_version.reify
+      if @customer.save
+        redirect_to @customer, notice: "Customer was successfully restored."
+      else
+        render "deleted"
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_customer
       @customer = Customer.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    def set_version
+      @version = PaperTrail::Version.find_by(item_id: params[:id], id: params[:version_id])
+    end
+
     def customer_params
       params.require(:customer).permit(:first_name, :last_name, :birthday, :country)
     end
