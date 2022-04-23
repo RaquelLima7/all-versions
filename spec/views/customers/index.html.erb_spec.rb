@@ -6,12 +6,14 @@ RSpec.describe "customers/index", type: :view do
       Customer.create!(
         first_name: "First Name",
         last_name: "Last Name",
-        country: "Country"
+        country: "Country",
+        birthday: "Sat, 22 Apr 2017"
       ),
       Customer.create!(
         first_name: "First Name",
         last_name: "Last Name",
-        country: "Country"
+        country: "Country",
+        birthday: "Sat, 22 Apr 2017"
       )
     ])
   end

@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe "customers/new", type: :view do
   before(:each) do
     assign(:customer, Customer.new(
-      first_name: "MyString",
-      last_name: "MyString",
-      country: "MyString"
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      birthday: Faker::Date.birthday(min_age: 18, max_age: 80),
+      country: Faker::Address.country
     ))
   end
 
