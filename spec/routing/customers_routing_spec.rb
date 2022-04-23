@@ -34,5 +34,25 @@ RSpec.describe CustomersController, type: :routing do
     it "routes to #destroy" do
       expect(delete: "/customers/1").to route_to("customers#destroy", id: "1")
     end
+
+    it "routes to #versions" do
+      expect(get: "/customers/1/versions").to route_to("customers#versions", id: "1")
+    end
+
+    it "routes to #version" do
+      expect(get: "/customers/1/version/1").to route_to("customers#version", id: "1", version_id: "1")
+    end
+
+    it "routes to #revert" do
+      expect(post: "/customers/1/revert/1").to route_to("customers#revert", id: "1", version_id: "1")
+    end
+
+    it "routes to #deleted" do
+      expect(get: "/customers/deleted").to route_to("customers#deleted")
+    end
+
+    it "routes to #restore" do
+      expect(post: "/customers/1/restore").to route_to("customers#restore", id: "1")
+    end
   end
 end
