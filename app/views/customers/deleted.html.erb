@@ -1,9 +1,9 @@
 <div class="container mt-5">
   <p id="notice"><%= notice %></p>
 
-  <h1 class="underline mb-3">Customers</h1>
+  <h1>Deleted Customers</h1>
 
-  <table class="m-3">
+  <table>
     <thead>
       <tr>
         <th>First name</th>
@@ -15,12 +15,11 @@
     </thead>
 
     <tbody>
-      <%= render @customers %>
+      <%= render partial: "customer", collection: @customers %>
     </tbody>
   </table>
 
   <br>
 
-  <%= link_to 'New Customer', new_customer_path %>
-  <%# link_to "All Customers deleted", deleted_customers_path %>
+  <%= link_to 'Back', customers_path %>
 </div>

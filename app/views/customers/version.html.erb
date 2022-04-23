@@ -1,0 +1,37 @@
+<div class="container mt-5">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>First Name:</strong>
+    <%= @version.reify.first_name %>
+  </p>
+
+  <p>
+    <strong>Last Name:</strong>
+    <%= @version.reify.last_name %>
+  </p>
+
+  <p>
+    <strong>Birthday:</strong>
+    <%= @version.reify.birthday %>
+  </p>
+
+  <p>
+    <strong>Country:</strong>
+    <%= @version.reify.country %>
+  </p>
+
+  <p>
+    <strong>Event:</strong>
+    <%= @version.event %>
+  </p>
+
+  <p>
+    <strong>Date:</strong>
+    <%= @version.created_at.strftime('%d/%m/%y') %>
+  </p>
+
+
+  <%= link_to 'Revert to this version', revert_customer_path(@version.item_id, @version), { method: :post } %>
+  <%= link_to 'Back', versions_customer_path(@version.item_id) %>
+</div>

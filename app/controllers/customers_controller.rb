@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: %i[ show edit update destroy ]
+  before_action :set_customer, only: %i[ show edit update destroy versions]
 
   # GET /customers or /customers.json
   def index
@@ -7,8 +7,7 @@ class CustomersController < ApplicationController
   end
 
   # GET /customers/1 or /customers/1.json
-  def show
-  end
+  def show; end
 
   # GET /customers/new
   def new
@@ -16,8 +15,7 @@ class CustomersController < ApplicationController
   end
 
   # GET /customers/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /customers or /customers.json
   def create
@@ -55,6 +53,11 @@ class CustomersController < ApplicationController
       format.html { redirect_to customers_url, notice: "Customer was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  # GET /customers/:id/versions
+  def versions
+    @customers = @customer.versions
   end
 
   private
