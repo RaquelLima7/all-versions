@@ -1,7 +1,18 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+@customer = Customer.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, country: Faker::Address.country, birthday: Faker::Date.birthday(min_age: 18, max_age: 80))
+2.upto(6) do |i|
+  @customer = Customer.update(first_name: "New name #{i}", last_name: Faker::Name.last_name, country: Faker::Address.country, birthday: Faker::Date.birthday(min_age: 18, max_age: 80))
+end
+
+1.upto(2) do |i|
+  @deleted_customer = Customer.create(first_name: "Deleted Customer #{i} Version 1", last_name: Faker::Name.last_name, country: Faker::Address.country, birthday: Faker::Date.birthday(min_age: 18, max_age: 80) )
+  @deleted_customer.destroy
+  @deleted_customer= Customer.new(id: @deleted_customer.id).versions.last.reify
+  @deleted_customer.save
+  @deleted_customer.update(first_name: "Deleted Customer #{i} Version 2")
+  @deleted_customer.destroy
+end
+
+@restored_customer = Customer.create(first_name: "A Previously Deleted Customer", last_name: Faker::Name.last_name, country: Faker::Address.country, birthday: Faker::Date.birthday(min_age: 18, max_age: 80) )
+@restored_customer.destroy
+@restored_customer = Customer.new(id: @restored_customer.id).versions.last.reify
+@restored_customer.save
