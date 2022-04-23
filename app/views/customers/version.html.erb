@@ -1,37 +1,54 @@
 <div class="container mt-5">
-  <p id="notice"><%= notice %></p>
+  <% if notice %>
+    <p id="notice">
+      <div class="alert alert-success" role="alert">
+        <%= notice %>
+      </div>
+    </p>
+  <% end %>
 
-  <p>
-    <strong>First Name:</strong>
-    <%= @version.reify.first_name %>
-  </p>
+  <%= link_to versions_customer_path(@version.item_id), class: "text-decoration-none" do %>
+    <i class="fas fa-angle-double-left"></i> Back
+  <% end %>
 
-  <p>
-    <strong>Last Name:</strong>
-    <%= @version.reify.last_name %>
-  </p>
+  <div class="row mt-5">
+    <div class="col-12 col-md-6 offset-lg-3">
+      <div class="text-dark p-3 shadow">
+      <h3 class="text-muted text-center mb-2">Customer:</h3>
+        <p>
+          <strong>First Name:</strong>
+          <%= @version.reify.first_name %>
+        </p>
 
-  <p>
-    <strong>Birthday:</strong>
-    <%= @version.reify.birthday %>
-  </p>
+        <p>
+          <strong>Last Name:</strong>
+          <%= @version.reify.last_name %>
+        </p>
 
-  <p>
-    <strong>Country:</strong>
-    <%= @version.reify.country %>
-  </p>
+        <p>
+          <strong>Birthday:</strong>
+          <%= @version.reify.birthday %>
+        </p>
 
-  <p>
-    <strong>Event:</strong>
-    <%= @version.event %>
-  </p>
+        <p>
+          <strong>Country:</strong>
+          <%= @version.reify.country %>
+        </p>
 
-  <p>
-    <strong>Date:</strong>
-    <%= @version.created_at.strftime('%d/%m/%y') %>
-  </p>
+        <p>
+          <strong>Event:</strong>
+          <%= @version.event %>
+        </p>
 
+        <p>
+          <strong>Date:</strong>
+          <%= @version.created_at.strftime('%d/%m/%y') %>
+        </p>
 
-  <%= link_to 'Revert to this version', revert_customer_path(@version.item_id, @version), { method: :post } %>
-  <%= link_to 'Back', versions_customer_path(@version.item_id) %>
+        <div class="d-flex justify-content-end pe-3">
+          <%= link_to 'Revert to this version', revert_customer_path(@version.item_id, @version), method: :post, class: 'btn btn-success' %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

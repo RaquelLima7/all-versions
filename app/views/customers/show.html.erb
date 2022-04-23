@@ -1,27 +1,46 @@
 <div class="container mt-5">
-  <p id="notice"><%= notice %></p>
+  <% if notice %>
+    <p id="notice">
+      <div class="alert alert-success" role="alert">
+        <%= notice %>
+      </div>
+    </p>
+  <% end %>
 
-  <p>
-    <strong>First name:</strong>
-    <%= @customer.first_name %>
-  </p>
+  <%= link_to customers_path, class: "text-decoration-none" do %>
+    <i class="fas fa-angle-double-left"></i> Back
+  <% end %>
 
-  <p>
-    <strong>Last name:</strong>
-    <%= @customer.last_name %>
-  </p>
+  <div class="row mt-5">
+    <div class="col-12 col-md-6 offset-lg-3">
+      <div class="text-dark p-3 shadow">
+        <h3 class="text-muted text-center mb-2">Customer:</h3>
+        <p>
+          <strong>First name:</strong>
+          <%= @customer.first_name %>
+        </p>
 
-  <p>
-    <strong>Birthday:</strong>
-    <%= @customer.birthday %>
-  </p>
+        <p>
+          <strong>Last name:</strong>
+          <%= @customer.last_name %>
+        </p>
 
-  <p>
-    <strong>Country:</strong>
-    <%= @customer.country %>
-  </p>
+        <p>
+          <strong>Birthday:</strong>
+          <%= @customer.birthday %>
+        </p>
 
-  <%= link_to 'Edit', edit_customer_path(@customer) %> |
-  <%= link_to 'Back', customers_path %>
+        <p>
+          <strong>Country:</strong>
+          <%= @customer.country %>
+        </p>
 
+        <div class="d-flex justify-content-end pe-3">
+          <%= link_to edit_customer_path(@customer), class: 'btn btn-success' do %>
+            <i class="fa-solid fa-pencil"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

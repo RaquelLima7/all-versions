@@ -1,13 +1,13 @@
 <% unless customer.try(:event) && (customer.event == "create" || customer.event == "destroy") %>
     <tr>
-      <td class="align-middle"><%= customer.try(:reify) ? customer.reify.first_name : customer.first_name %></td>
+      <td class="align-middle text-center"><%= customer.try(:reify) ? customer.reify.first_name : customer.first_name %></td>
       <td class="align-middle text-center"><%= customer.try(:reify) ? customer.reify.last_name : customer.last_name %></td>
       <td class="align-middle text-center"><%= customer.try(:reify) ? customer.reify.birthday : customer.birthday %></td>
       <td class="align-middle text-center"><%= customer.try(:reify) ? customer.reify.country : customer.country %></td>
       <td class="align-middle text-center"><%= customer.try(:reify) ? customer.event : ' ' %></td>
       <td class="align-middle text-center"><%= customer.try(:reify) ? customer.created_at.strftime('%d/%m/%y') : ' ' %></td>
       <% if params[:action] == "index" %>
-          <td ><%= link_to customer_path(customer) do  %>
+          <td ><%= link_to customer_path(customer) do %>
             <i class="fa-solid fa-eye"></i>
           <% end %> </td>
           <td ><%= link_to edit_customer_path(customer) do %>

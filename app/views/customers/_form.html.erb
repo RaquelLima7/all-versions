@@ -11,27 +11,25 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field mt-2">
     <%= form.label :first_name %>
     <%= form.text_field :first_name %>
   </div>
 
-  <div class="field">
+  <div class="field mt-2">
     <%= form.label :last_name %>
     <%= form.text_field :last_name %>
   </div>
 
-  <div class="field">
+  <div class="field mt-2">
     <%= form.label :birthday %>
     <%= form.date_select :birthday, start_year: 1900, end_year: Time.now.year %>
   </div>
 
-  <div class="field">
+  <div class="field mt-2">
     <%= form.label :country %>
     <%= form.text_field :country %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= form.submit class: 'btn btn-primary mt-3' %>
 <% end %>

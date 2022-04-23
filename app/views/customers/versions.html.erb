@@ -1,9 +1,19 @@
 <div class="container mt-5">
-  <p id="notice"><%= notice %></p>
+  <% if notice %>
+    <p id="notice">
+      <div class="alert alert-success" role="alert">
+        <%= notice %>
+      </div>
+    </p>
+  <% end %>
 
   <h1 class="text-center m-5">Previous Versions</h1>
 
-  <table class="table">
+  <%= link_to customers_path, class: "text-decoration-none" do %>
+    <i class="fas fa-angle-double-left"></i> Back
+  <% end %>
+
+  <table class="table mt-4">
     <thead class='table-active th-text-color'>
       <tr>
         <th class="align-middle text-center">First name</th>
@@ -22,6 +32,4 @@
   </table>
 
   <br>
-
-  <%= link_to 'Back', customers_path %>
 </div>
