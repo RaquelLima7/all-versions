@@ -1,24 +1,6 @@
-# README
+## First Challenge
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<br>
 
-Things you may want to cover:
+Ruby on Rails project using the PaperTrail gem where we can see the customer's versions. We can view and revert a version, as well as restore a deleted customer.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
