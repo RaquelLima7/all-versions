@@ -1,18 +1,14 @@
 version: "3.9"
 services:
   db:
-    image: second_challange_web
+    image: nouchka/sqlite3:latest
     volumes:
       - ./tmp/db:/var/lib/sqlite3/data
-    environment:
-      POSTGRES_PASSWORD: password
-    ports:
-      - "4040:5432"
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - .:/myapp
+      - .:/second-challange
     ports:
       - "3000:3000"
     depends_on:
